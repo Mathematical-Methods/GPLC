@@ -1,0 +1,129 @@
+\documentclass[12pt]{article} % Document class and font size
+
+% Packages for additional functionality
+\usepackage[utf8]{inputenc}   % Encoding
+\usepackage[T1]{fontenc}      % Font encoding
+\usepackage{lmodern}          % Latin Modern font
+\usepackage{geometry}         % Adjust page margins
+\geometry{a4paper, margin=1in} % Set paper size and margins
+\usepackage{amsmath}          % For math equations
+\usepackage{amssymb} % Required for \mathbb{R}
+\usepackage{graphicx}         % For including images
+\usepackage{hyperref}         % For hyperlinks
+\hypersetup{
+	colorlinks=true,          % Colored links
+	linkcolor=blue,           % Color for internal links
+	urlcolor=blue             % Color for URLs
+}
+
+% Title, author, and date
+\title{An Exploration of "Gauss’s Principle With Inequality Constraints for Multiagent Navigation and Control" by Boyang Zhang and Henri P. Gavin}
+\author{Gabriel Dimonde}
+\date{\today} % Automatically inserts current date
+
+\begin{document}
+	
+	% Generate title
+	\maketitle
+
+	
+	% Sections
+	\section{Section II - Preliminaries}
+	Here, we review Section II of "Gauss’s Principle With Inequality Constraints for Multiagent Navigation and Control" by Boyang Zhang and Henri P. Gavin. 
+	
+	Next, I define variables and what their meanings are relating to multiagent navigation and control as if I were to define variables for a MATLAB or Octave program. Please keep in mind that the intention, first of all, is to build a GPLC control framework based pendulum, so the variables set here and their explanations are meant both to cover their generality and to provide understanding required for simulation of a simple pendulum.
+	
+	$N$ is the number of agents: 
+	\begin{equation}
+		N = 1 
+	\end{equation}
+	It equals one in this case, due to the requirements of a pendulum (an ideally single mass) and for defining the size of required matrices / vectors.
+
+	It is worth noting that the following matrix and vector sizes are dependent on N, but also the degree of freedom (DOF) of each mass particle (or agent). For the rest of this summary DOF is understood to be two, and is not included as a variable in matrix and vector dimensionality specifications, it will be included as "2".
+
+	$M$ is a Symmetric Positive Definite (SPD) Mass matrix, of size 2N x 2N. A symmetric matrix requires that it be equal to its transpose. So, $M = M^T$. A symmetric matrix M is a positive definite matrix if the real number $x^TMx$ is always positive for $x \in \mathbb{R}^{2N}$. 
+	
+	\begin{equation}
+		M = \begin{bmatrix}
+			m & 0  \\
+			0 & m \\
+		\end{bmatrix}
+	\end{equation}
+	So, in this case,  M obviously satisfies the requirement that it be equal to its transpose. As for the proof that M, in its current configuration, can also be positive definite, we must consider what m would result in the real number $x^\top Mx$ as always positive for $x \in \mathbb{R}^{2N}$. 
+	
+	For $N = 1$, $x =  \begin{bmatrix} x_1 \\ x_2\\ \end{bmatrix}$. Evaluating the real number expression $x\top Mx$ symbolically results in:
+	\begin{equation}
+		m (x_1^2 + x_2^2)
+		\label{SPD}
+	\end{equation}
+	showing that for $x_1 \in \mathbb{R}$ and $x_2 \in \mathbb{R}$ Expression~\ref{SPD} $> 0$ when $m > 0$. 
+	
+	$a$ is the unconstrained accelerations related to the net forces due to internal and external actions through Newton's Second Law: $a \in \mathbb{R}^{2N}$
+	
+	$f$ is the net forces to the internal and external actions through Newton's Second Law: $f = M a$ 
+	
+	$q(t)$ is the coordinate position vector that varies with time: $q(t) \in \mathbb{R}^{2N}$
+	
+	$\ddot{q}(t)$ is the second derivative of q with respect to time. $\ddot{q}(t) \in \mathbb{R}^{2N}$
+	
+	Now, switching contexts to quadratic programming (QP) methods. The objective of QP is to find an n-dimensional vector $\ddot{q}(t)$  that will minimize $Z$: 
+	
+	\begin{equation}
+		Z = \frac{1}{2} \ddot{q}^\top M \ddot{q} - f^\top \ddot{q}
+		\label{Z}
+	\end{equation}
+	subject to constraints:
+	\begin{equation}
+		\mathbf{A}\mathbf{\ddot{q}} \preccurlyeq \mathbf{b}
+		\label{Z}
+	\end{equation}
+	
+	Generally, the constraints to be imposed on the above minimization would enforce geometric relationships among coordinate positions $q(t)$ and velocities $\dot{q}$. Their form would be:
+	
+	\begin{equation}
+		\mathbf{g}(\mathbf{q}, \mathbf{\dot{q}}, t) = \mathbf{0}
+	\end{equation}
+	
+	% and thus apply generally to non-holonomic systems.
+	
+	% For the Multiagent Navigation system, the constraints are purely on q, or
+	% in other words, purely geometric relationships dependent on q.
+	% The form, in this paper, is then:
+	% g(q, t) = 0;
+	
+	% This Multiagent system, to be able to handle inequality constraints, converts
+	% inequality constraints h(q,t) <= 0 into equality constraints.
+	% To do this, one has to break down what the inequality constraint is:
+	
+	
+	
+	%
+	%\section{Main Content}
+	%\subsection{Subsection Example}
+	%This is a subsection. You can add text, lists, or equations here. 
+	%For instance, here’s a displayed equation:
+	%\begin{equation}
+	%	\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+	%\end{equation}
+	
+	% Example of a list
+	%Here’s a simple list:
+	%\begin{itemize}
+	%	\item First item
+	%	\item Second item
+	%	\item Third item
+	%\end{itemize}
+	
+	%\section{Conclusion}
+	%This is the conclusion. You can summarize your document here. 
+	%Feel free to modify this template to suit your needs!
+	
+	% Optional: Include an image (uncomment and adjust path)
+	%\begin{figure}[h]
+	% \centering
+	%    \includegraphics[width=0.5\textwidth]{/home/unknown/Downloads/content.jpg}
+	%   \caption{Caption for your image.}
+	%    \label{fig:example}
+	%\end{figure}
+	
+\end{document}
